@@ -9,7 +9,7 @@ async function fetchOpenSeaStages(config, logger) {
   const headers = {
     "content-type": "application/json",
     "x-app-id": "opensea-web",
-    "user-agent": "Mozilla/5.0 hitamlegam-evm-mint-bot",
+    "user-agent": "Mozilla/5.0 jaune-evm-mint-bot",
   };
 
   try {

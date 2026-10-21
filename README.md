@@ -1,4 +1,4 @@
-# 🎯 EVM Mint BOT — OpenSea Raw Transaction Sniper
+# 🎯 jaune — OpenSea Raw Transaction Sniper
 
 OpenSea raw transaction sniper for EVM NFT whitelist / FCFS mints.
 

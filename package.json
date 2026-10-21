@@ -1,8 +1,8 @@
 {
-  "name": "evm-mint-bot",
+  "name": "jaune-evm-mint-bot",
   "version": "1.0.0",
   "private": false,
-  "description": "OpenSea raw transaction sniper for EVM NFT whitelist/FCFS mints.",
+  "description": "jaune \u2014 OpenSea raw transaction sniper for EVM NFT whitelist/FCFS mints (same-nonce gas ladder).",
   "type": "commonjs",
   "main": "src/index.js",
   "scripts": {

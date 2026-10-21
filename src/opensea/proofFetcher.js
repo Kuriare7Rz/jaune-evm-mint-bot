@@ -63,7 +63,7 @@ async function requestOpenSeaRawTx(config, wallet, logger) {
     "content-type": "application/json",
     "x-signed-query": "false",
     "x-app-id": "opensea-web",
-    "user-agent": "Mozilla/5.0 hitamlegam-evm-mint-bot",
+    "user-agent": "Mozilla/5.0 jaune-evm-mint-bot",
   };
   if (config.openSeaJwt) headers.authorization = `Bearer ${config.openSeaJwt}`;
 
