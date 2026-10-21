@@ -45,6 +45,10 @@ async function connectRpc(config, logger) {
       `RPC chainId ${best.chainId} does not match ${config.chainIdentifier} (${config.expectedChainId})`,
     );
   }
+  // Keep every working endpoint: broadcasts fan out to all of them, reads
+  // stay on the fastest one.
+  best.providers = working.map((entry) => entry.provider);
+  best.urls = working.map((entry) => entry.url);
   return best;
 }
 

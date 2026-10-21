@@ -128,6 +128,7 @@ function loadConfig(argv = process.argv.slice(2)) {
     expectedChainId: CHAIN_IDS[chainIdentifier],
     privateKeys,
     rpcUrls: listValue(env.RPC_URLS || env.RPC_URL),
+    privateRelayUrl: env.PRIVATE_RELAY_URL || "",
     nftContract: env.NFT_CONTRACT || "",
     mintMode: String(env.MINT_MODE || "opensea_raw").toLowerCase(),
     openSeaCollectionSlug:

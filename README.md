@@ -33,6 +33,33 @@ After a mint war, rotate or clear secrets from `.env`.
 
 ---
 
+## ⚡ Speed architecture
+
+Mint wars are won in the fire path. jaune's run is split into phases so that
+nothing slow sits between the phase opening and your transactions hitting
+the mempool:
+
+1. **Preflight (before the gun)** — config validation, contract check, and
+   every wallet's balance are collected up front. The fire path never spends
+   an RPC round-trip on them again.
+2. **Parallel raw-tx fetch** — each wallet polls OpenSea for its released raw
+   transaction *independently and concurrently*. No wallet waits for a
+   sibling's confirmation.
+3. **One gas estimate** — all wallets share the same calldata shape, so gas
+   is estimated once, then scaled by the `gasLimitBufferMultiplier` OpenSea
+   itself ships with the transaction when present.
+4. **Parallel nonces** — one round of nonce fetches, all wallets at once.
+5. **Pre-signed ladder, fired everywhere** — each wallet's gas ladder
+   (default tiers 300/220/160/120% of the fee plan, same nonce) is fully
+   signed locally, then every signed tier is broadcast to **all working RPC
+   endpoints simultaneously** — plus an optional private relay
+   (`PRIVATE_RELAY_URL`, e.g. Flashbots Protect). Duplicate "already known"
+   replies count as landed, not errors.
+6. **Receipts last** — confirmations are collected in parallel only after
+   every wallet's ladder is already in flight.
+
+---
+
 ## 📦 Install
 
 Requires Node.js 20+.

@@ -101,6 +101,9 @@ async function requestOpenSeaRawTx(config, wallet, logger) {
       data: raw.data,
       value: BigInt(raw.value || 0),
       route: "opensea-raw",
+      // OpenSea sizes its own gas estimate for this calldata; when present
+      // the caller applies this multiplier instead of re-estimating blind.
+      bufferMultiplier: Number(raw.gasLimitBufferMultiplier || 0) || null,
     },
     errors,
   };

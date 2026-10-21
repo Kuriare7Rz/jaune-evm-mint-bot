@@ -32,8 +32,10 @@ async function getPriorityFee(provider, config) {
 }
 
 async function buildFeePlan(provider, config) {
-  const baseFee = await getBaseFee(provider);
-  const maxPriorityFeePerGas = await getPriorityFee(provider, config);
+  const [baseFee, maxPriorityFeePerGas] = await Promise.all([
+    getBaseFee(provider),
+    getPriorityFee(provider, config),
+  ]);
   let maxFeePerGas =
     (baseFee * config.baseFeeMultiplier) / 100n + maxPriorityFeePerGas;
   if (maxFeePerGas < maxPriorityFeePerGas) maxFeePerGas = maxPriorityFeePerGas;
